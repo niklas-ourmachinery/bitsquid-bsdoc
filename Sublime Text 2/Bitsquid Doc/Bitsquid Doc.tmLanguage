@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>Bitsquid Doc</string>
+	<key>comment</key>
+	<string>Bitsquid Doc Syntax (v 0.01)</string>
+	<key>fileTypes</key>
+	<array>
+		<string>bsdoc</string>
+	</array>
+	<key>scopeName</key>
+	<string>markup.bitsquid-doc</string>
+
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>support.function</string>
+			<key>match</key>
+			<string>@api|@text|@glossary|@endglossary</string>
+		</dict>
+
+		<dict>
+			<key>name</key>
+			<string>entity.name.tag</string>
+			<key>match</key>
+			<string>@(note|img|caption|title|th|td) .*</string>
+		</dict>
+
+		<dict>
+			<key>name</key>
+			<string>entity.name.tag</string>
+			<key>match</key>
+			<string>^(#+)\s+(.*)</string>
+		</dict>
+
+		<dict>
+			<key>name</key>
+			<string>entity.name.tag</string>
+			<key>match</key>
+			<string>^\s*(\*|:)</string>
+		</dict>
+
+		<dict>
+			<key>name</key>
+			<string>string.quoted</string>
+			<key>match</key>
+			<string>^[A-Za-z][A-Za-z0-9_.]*\(.*</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>string.quoted</string>
+			<key>match</key>
+			<string>^[A-Za-z][A-Za-z0-9_]*\.*[A-Za-z][A-Za-z0-9_]*$</string>
+		</dict>
+
+		<dict>
+			<key>name</key>
+			<string>string.quoted</string>
+			<key>match</key>
+			<string>^\s+:.*</string>
+		</dict>
+
+		<dict>
+			<key>name</key>
+			<string>string.quoted</string>
+			<key>match</key>
+			<string>@(lualine|cppline|codeline|rubyline|htmlline) .*</string>
+		</dict>
+
+		<dict>
+			<key>name</key>
+			<string>string.quoted</string>
+			<key>begin</key>
+			<string>@(lua|code|cpp|ruby|html)</string>
+			<key>end</key>
+			<string>@(endlua|endcode|endcpp|endruby|endhtml)</string>
+		</dict>
+
+		<dict>
+			<key>name</key>
+			<string>support.function.lua</string>
+			<key>match</key>
+			<string>(%[ibcg]) (\S*[^\s\.,])</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>support.function.lua</string>
+			<key>match</key>
+			<string>%g\(.*?\) (\S*[^\s\.,])</string>
+		</dict>
+		
+		<dict>
+			<key>name</key>
+			<string>support.function.lua</string>
+			<key>match</key>
+			<string>%(ii|bb|cc|gg|ll) .*? %(ii|bb|cc|gg|ll)</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>support.function.lua</string>
+			<key>match</key>
+			<string>%gg\(.*?\) .*? %(ii|bb|cc|gg)</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>support.function.lua</string>
+			<key>match</key>
+			<string>%link \S*[^\s\.,]</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>support.function.lua</string>
+			<key>match</key>
+			<string>%link(.*?) \S*[^\s\.,]</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>support.function.lua</string>
+			<key>match</key>
+			<string>%r ([A-Z]\w+\.\w+\(\)|\w+\(\)|[A-Z]\w+)</string>
+		</dict>
+
+		<dict>
+			<key>name</key>
+			<string>invalid.illegal</string>
+			<key>match</key>
+			<string>(%[a-z]+)</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>invalid.illegal</string>
+			<key>match</key>
+			<string>(@[a-z]+)</string>
+		</dict>
+	</array>
+	
+</dict>
+</plist>

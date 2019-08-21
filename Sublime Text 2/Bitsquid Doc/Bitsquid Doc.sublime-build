@@ -1,0 +1,5 @@
+{
+	"cmd": ["ruby", "_make.rb", "-v", "$file"],
+	"file_regex": "^(...*?):([0-9]*):?([0-9]*)",
+	"selector": "markup.bitsquid-doc"
+}

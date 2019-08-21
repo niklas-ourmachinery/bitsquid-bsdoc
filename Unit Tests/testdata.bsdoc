@@ -1,0 +1,499 @@
+----------------------------------------------------------------------
+One paragraph.
+With two lines.
+
+Another paragraph.
+----------------------------------------------------------------------
+<p>
+	One paragraph.
+	With two lines.
+</p>
+
+<p>Another paragraph.</p>
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+# One
+## Two
+
+### Three
+
+
+Stuff
+----------------------------------------------------------------------
+<h1>One</h1>
+
+<h2>Two</h2>
+
+<h3>Three</h3>
+
+<p>Stuff</p>
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+* A
+* simple
+* list
+----------------------------------------------------------------------
+<ul>
+	<li><p>A</p></li>
+	<li><p>simple</p></li>
+	<li><p>list</p></li>
+</ul>
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+Putting words in %i italics and %b bold.
+----------------------------------------------------------------------
+<p>Putting words in <i>italics</i> and <b>bold</b>.</p>
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+Some stuff.
+
+	With some indented stuff.
+	Here.
+----------------------------------------------------------------------
+<p>Some stuff.</p>
+
+<blockquote>
+	<p>
+		With some indented stuff.
+		Here.
+	</p>
+</blockquote>
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+Some stuff.
+
+	A more complicated.
+
+	Example.
+
+
+		Of indentation.
+----------------------------------------------------------------------
+<p>Some stuff.</p>
+
+<blockquote>
+	<p>A more complicated.</p>
+	<p>Example.</p>
+	<blockquote><p>Of indentation.</p></blockquote>
+</blockquote>
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+* A list item with
+	multiple lines.
+* Next item.
+----------------------------------------------------------------------
+<ul>
+	<li>
+		<p>
+			A list item with
+			multiple lines.
+		</p>
+	</li>
+	<li><p>Next item.</p></li>
+</ul>
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+* A list item with
+	multiple paragraphs.
+
+	Here is the second paragraph.
+* Next item.
+----------------------------------------------------------------------
+<ul>
+	<li>
+		<p>
+			A list item with
+			multiple paragraphs.
+		</p>
+		<p>Here is the second paragraph.</p>
+	</li>
+	<li><p>Next item.</p></li>
+</ul>
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+* Caught in the jungle
+	* By a bear
+	* By a lion
+	* By something else
+* Caught in the sea
+	* By a shark
+	* By a whale
+----------------------------------------------------------------------
+<ul>
+	<li>
+		<p>Caught in the jungle</p>
+		<ul>
+			<li><p>By a bear</p></li>
+			<li><p>By a lion</p></li>
+			<li><p>By something else</p></li>
+		</ul>
+	</li>
+	<li>
+		<p>Caught in the sea</p>
+		<ul>
+			<li><p>By a shark</p></li>
+			<li><p>By a whale</p></li>
+		</ul>
+	</li>
+</ul>
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+Here is some lua code
+
+@code
+a = 3
+b = a + 3
+@endcode
+----------------------------------------------------------------------
+<p>Here is some lua code</p>
+
+<pre>a = 3
+b = a + 3</pre>
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+Here is some lua code in a list
+
+* A good way of cooking
+
+	@code
+		a = 3
+		b = a + 3
+	@endcode
+----------------------------------------------------------------------
+<p>Here is some lua code in a list</p>
+
+<ul>
+	<li>
+		<p>A good way of cooking</p>
+		<pre>	a = 3
+	b = a + 3</pre>
+	</li>
+</ul>
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+Putting %ii words in italics %ii and %bb words in bold %bb.
+----------------------------------------------------------------------
+<p>Putting <i>words in italics</i> and <b>words in bold</b>.</p>
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+You should enjoy this.
+
+@note You don't have to.
+	Enjoying this is optional.
+----------------------------------------------------------------------
+<p>You should enjoy this.</p>
+
+<div class="note">
+	<p><b>Note</b></p>
+	<p>
+		You don't have to.
+		Enjoying this is optional.
+	</p>
+</div>
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+Some defintions.
+
+:one
+	a number
+:two
+	another number
+:three
+	a number which requires
+	a longer explanation
+----------------------------------------------------------------------
+<p>Some defintions.</p>
+
+<dl>
+	<dt>one</dt>
+	<dd><p>a number</p></dd>
+	<dt>two</dt>
+	<dd><p>another number</p></dd>
+	<dt>three</dt>
+	<dd>
+		<p>
+			a number which requires
+			a longer explanation
+		</p>
+	</dd>
+</dl>
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+@title My document.
+
+Bla bla
+----------------------------------------------------------------------
+<h1 id="title">My document.</h1>
+
+<p>Bla bla</p>
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+To build the BitSquid engine you need:
+
+* The BitSquid source code
+* The BitSquid library folder (with libs and headers)
+* Ruby
+* Visual Studio 2008
+* The platform specific toolchains for PS3 & X360 (to build for those platforms)
+
+You should get the BitSquid source code and libraries from BitSquid. Ruby is a public download.
+----------------------------------------------------------------------
+<p>To build the BitSquid engine you need:</p>
+
+<ul>
+	<li><p>The BitSquid source code</p></li>
+	<li><p>The BitSquid library folder (with libs and headers)</p></li>
+	<li><p>Ruby</p></li>
+	<li><p>Visual Studio 2008</p></li>
+	<li><p>The platform specific toolchains for PS3 &amp; X360 (to build for those platforms)</p></li>
+</ul>
+
+<p>You should get the BitSquid source code and libraries from BitSquid. Ruby is a public download.</p>
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+@note The %i create_configs script detects the %i .cpp files that needs to be compiled to build the engine. So each time you add or remove a %i .cpp file you need to run the script. It is good practice to run the script every time you pull new changes from upstream.
+----------------------------------------------------------------------
+<div class="note">
+	<p><b>Note</b></p>
+	<p>The <i>create_configs</i> script detects the <i>.cpp</i> files that needs to be compiled to build the engine. So each time you add or remove a <i>.cpp</i> file you need to run the script. It is good practice to run the script every time you pull new changes from upstream.</p>
+</div>
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+You can find most of these prerequisites at %link http://www.stack.nl/~dimitri/doxygen/install.html#install_bin_windows
+----------------------------------------------------------------------
+<p>You can find most of these prerequisites at <a class="link" href="http://www.stack.nl/~dimitri/doxygen/install.html#install_bin_windows">http://www.stack.nl/~dimitri/doxygen/install.html#install_bin_windows</a></p>
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+@img build_instructions_symbol_server.png
+----------------------------------------------------------------------
+<p class="image"><img src="build_instructions_symbol_server.png"/></p>
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+@cpp
+int n = num_players();
+for (int i=0; i<n; ++i)
+	...
+@endcpp
+----------------------------------------------------------------------
+<pre>int n = num_players();
+for (int i=0; i&lt;n; ++i)
+	...</pre>
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+We use the Javadoc-syntax for documentation (%cc /// %cc) rather than the QT syntax (%cc //! %cc), because it is easier to type. Use %cc @name %cc to name groups of methods/members.
+----------------------------------------------------------------------
+<p>We use the Javadoc-syntax for documentation (<tt>///</tt>) rather than the QT syntax (<tt>//!</tt>), because it is easier to type. Use <tt>@name</tt> to name groups of methods/members.</p>
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+:Ruby Installer
+	%link http://rubyinstaller.org/
+----------------------------------------------------------------------
+<dl>
+	<dt>Ruby Installer</dt>
+	<dd><p><a class="link" href="http://rubyinstaller.org/">http://rubyinstaller.org/</a></p></dd>
+</dl>
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+@img dlc_bundled_content.png
+@caption Bundled output
+----------------------------------------------------------------------
+<p class="image"><img src="dlc_bundled_content.png"/></p>
+
+<p class="caption">Bundled output</p>
+----------------------------------------------------------------------
+
+
+
+----------------------------------------------------------------------
+@th Path	Type	Name	Properties
+@td sound/phrases/hello.en.wav	wav	sound/phrases/hello	en
+----------------------------------------------------------------------
+<table>
+	<tr>
+		<th>Path</th>
+		<th>Type</th>
+		<th>Name</th>
+		<th>Properties</th>
+	</tr>
+	<tr>
+		<td>sound/phrases/hello.en.wav</td>
+		<td>wav</td>
+		<td>sound/phrases/hello</td>
+		<td>en</td>
+	</tr>
+</table>
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+Stuff
+
+@api
+
+blob(x)
+	Returns the x
+----------------------------------------------------------------------
+<p>Stuff</p>
+
+<p class="definition">
+	<a name="blob">
+		<object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e" width="0" height="0"><param name="Keyword" value="blob"/></object
+		>blob(x)
+	</a>
+</p>
+
+<blockquote><p>Returns the x</p></blockquote>
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+## Cookies
+
+@api
+
+eat(x)
+	Eats the %r Cookie %i x.
+----------------------------------------------------------------------
+<h2>
+	<object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e" width="0" height="0"><param name="Keyword" value="Cookies"/></object
+	>Cookies
+</h2>
+
+<p class="definition">
+	<a name="eat">
+		<object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e" width="0" height="0"><param name="Keyword" value="eat"/></object
+		>eat(x)
+	</a>
+</p>
+
+<blockquote><p>Eats the <a class="ref" href="Cookie.html">Cookie</a> <i>x</i>.</p></blockquote>
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+@api
+
+blob(x)
+blob(x)
+	Returns the x
+----------------------------------------------------------------------
+<p class="definition">
+	<a name="blob">
+		<object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e" width="0" height="0"><param name="Keyword" value="blob"/></object
+		>blob(x)
+	</a>
+</p>
+
+<p class="definition">
+	<a name="blob">
+		<object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e" width="0" height="0"><param name="Keyword" value="blob"/></object
+		>blob(x)
+	</a>
+</p>
+
+<blockquote><p>Returns the x</p></blockquote>
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+@api
+
+blob(x)
+
+@text
+
+blob(x)
+
+@api
+
+blob(x)
+----------------------------------------------------------------------
+<p class="definition">
+	<a name="blob">
+		<object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e" width="0" height="0"><param name="Keyword" value="blob"/></object
+		>blob(x)
+	</a>
+</p>
+
+<p>blob(x)</p>
+
+<p class="definition">
+	<a name="blob">
+		<object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e" width="0" height="0"><param name="Keyword" value="blob"/></object
+		>blob(x)
+	</a>
+</p>
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+@code
+for (unsigned i=0; i<n; ++i)
+	printf("%i\n", i);
+@endcode
+----------------------------------------------------------------------
+<pre>for (unsigned i=0; i&lt;n; ++i)
+	printf("%i\n", i);</pre>
+----------------------------------------------------------------------
+

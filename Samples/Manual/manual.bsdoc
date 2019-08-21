@@ -1,0 +1,116 @@
+@title Bitsquid Documentation System
+
+# Introduction
+
+The %ii Bitsquid Documentation System %ii is the system used by Bitsquid for all system documentation (source code documentation is done through %i Doxygen).
+
+# Syntax Overview
+
+## Structure
+
+@td %cc @title Document title %cc	Document title
+@td %cc # Level 1 heading %cc	Level 1 heading
+@td %cc ## Level 2 heading %cc	Level 2 heading
+@td %cc ### Level 3 heading %cc	Level 3 heading
+@td %cc * List item %cc	Item in (unnumbered) list
+@td %cc @note Text %cc	Text to display in note box
+@td %cc @img images/larch.png %cc	Include image
+@td %cc @caption The Larch %cc	Caption for image
+@td %cc :definition %cc	Term to define (definition is indented)
+@td %cc @th Row %cc	Row of table headers
+@td %cc @td Data %cc	Row of table data
+
+Example of list:
+
+	* One
+	* Two
+	* Three
+
+Example of note:
+
+	@note Don't forget!
+
+Example of image:
+
+	@img sample.png
+	@caption A test image
+
+Example of definition list:
+
+	:Lua
+		A scripting language
+	:C++
+		A low level language
+
+## Formatting
+
+@td %cc \%i Italic word %cc	%i Italic word
+@td %cc \%ii Multiple italic words \%ii %cc	%ii Multiple italic words %ii
+@td %cc \%b Bold word %cc	%b Bold word
+@td %cc \%bb Multiple bold words \%bb %cc	%bb Multiple bold words %bb
+@td %cc \%c Code word %cc	%c Code word
+@td %cc \%cc Multiple code words \%cc %cc	%cc Multiple code words %cc
+@td %cc \%link http://www.bitsquid.se/ %cc	%link http://www.bitsquid.se/
+@td %cc \\%i Escaped %cc	\%i Escaped
+
+## Source code
+
+@td %cc @lua ... @endlua %cc	Mark a number of lines as Lua code
+@td %cc @cpp ... @endcpp %cc	Mark a number of lines as C++ code
+@td %cc @code ... @endcode %cc	Mark a number of lines as generic code
+@td %cc @lualine print(x) %cc	Used for a single line of Lua
+@td %cc @cppline x++; %cc	Used for a single line of C++
+@td %cc @codeline cd ~/lib %cc	Used for a single line of generic code
+
+Example of source code:
+
+	@cpp
+	for (unsigned i=0; i<n; ++i)
+		printf("%i\n", i);
+	@endcpp
+
+## Glossary
+
+@td %cc \%g Term %cc	Glossary term
+@td %cc \%gg Multiple word term \%gg %cc	Glossary term with multiple worlds
+@td %cc \%g(term) Text %cc	Glossary item where term differs from text
+@td %cc \%gg(term) Multiple word term \%gg %cc	Same for multiple words
+@td %cc @glossary ... @endglossary %cc	Encapsulates glossary definition
+
+Example of glossary:
+
+	Don't %g(forgetting) forget to by %g groceries.
+
+	@glossary
+	forgetting
+		The act of losing from one's memory that which has been held there.
+	groceries
+		Consumable goods purchased in a store.
+	@endglossary
+
+## API documentation
+
+@td %c @api	Enter API documentation mode
+@td %c @text	Back to regular text processing mode
+@td %cc \%r Applicaton.quit() %cc	Function reference: %r Application.quit()
+
+
+@code
+@api
+
+api_function_definition(with, arguments)
+    Api function description
+
+    :parameter
+        With description
+@endcode
+
+Example of api documentation:
+
+@api
+
+api_function_definition(with, arguments)
+    Api function description
+
+    :parameter
+        With description

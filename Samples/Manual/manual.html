@@ -1,0 +1,316 @@
+<html>
+	<head>
+		<title>Bitsquid Documentation System</title>
+		<style type="text/css">
+			body {margin: 1cm; font-family: georgia;}
+
+			/* Colors */
+			h1, h2, h3, a.ref:hover, a.link:hover {color: #64c1c8;}
+			p.definition, a.ref {color: #666666;}
+			dt, a.link, i, b, #toc a, th {color: #6c1234 ;}
+			.note {background: #e1cfd6;}
+			pre, #toc, th {background: #e0f2f4;}
+			tt {background: #e0f2f4;}
+
+			/* Formatting */
+			p.definition {font-weight: bold; margin-bottom: 0pt;}
+			dt {font-weight: normal; font-style: italic;}
+			dd {margin-bottom: 7pt;}
+			.note {padding: 0.2cm;}
+			.note p {margin: 0cm; margin-bottom: 7pt;}
+			pre {padding: 0.2cm; }
+			#title {text-align: center; font-size: 40pt;}
+			a {text-decoration:none;}
+			a.ref {font-weight: bold;} 
+			p.image {text-align: center;}
+			p.caption {text-align: center; font-style: italic;}
+			tt {padding: 2pt;}
+
+			#toc {padding: 0.4cm;}
+			#toc h1 {font-size: 100%; font-weight: normal; margin: 0px; margin-top: 10pt;}
+			#toc h2 {font-size: 100%; font-weight: normal; margin: 0px; margin-left: 1cm; margin-top: 5pt;}
+			#toc h3 {font-size: 100%; font-weight: normal; margin: 0px; margin-left: 2cm;}
+
+			#title {text-align: center; font-size: 40pt;}
+			table {margin-right: auto; border-collapse: collapse;}
+			td, th {text-align: left; border: 1pt black solid; padding: 3pt;}
+		</style>
+	</head>
+	<body>
+
+<h1 id="title">Bitsquid Documentation System</h1>
+<h1>Contents</h1>
+
+<div id="toc">
+	<h1><a href="#Introduction">1. Introduction</a></h1>
+	<h1><a href="#Syntax Overview">2. Syntax Overview</a></h1>
+	<h2><a href="#Structure">2.1 Structure
+</a></h2>
+	<h2><a href="#Formatting">2.2 Formatting
+</a></h2>
+	<h2><a href="#Source code">2.3 Source code
+</a></h2>
+	<h2><a href="#Glossary">2.4 Glossary
+</a></h2>
+	<h2><a href="#API documentation">2.5 API documentation
+</a></h2>
+</div>
+
+
+<h1><a name="Introduction">1. Introduction</a></h1>
+
+<p>The <i>Bitsquid Documentation System</i> is the system used by Bitsquid for all system documentation (source code documentation is done through <i>Doxygen)</i>.</p>
+
+<h1><a name="Syntax Overview">2. Syntax Overview</a></h1>
+
+<h2><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e" width="0" height="0"><param name="Keyword" value="Structure"/></object
+	><a name="Structure">2.1 Structure
+</a></h2>
+
+<table>
+	<tr>
+		<td><tt>@title Document title</tt></td>
+		<td>Document title</td>
+	</tr>
+	<tr>
+		<td><tt># Level 1 heading</tt></td>
+		<td>Level 1 heading</td>
+	</tr>
+	<tr>
+		<td><tt>## Level 2 heading</tt></td>
+		<td>Level 2 heading</td>
+	</tr>
+	<tr>
+		<td><tt>### Level 3 heading</tt></td>
+		<td>Level 3 heading</td>
+	</tr>
+	<tr>
+		<td><tt>* List item</tt></td>
+		<td>Item in (unnumbered) list</td>
+	</tr>
+	<tr>
+		<td><tt>@note Text</tt></td>
+		<td>Text to display in note box</td>
+	</tr>
+	<tr>
+		<td><tt>@img images/larch.png</tt></td>
+		<td>Include image</td>
+	</tr>
+	<tr>
+		<td><tt>@caption The Larch</tt></td>
+		<td>Caption for image</td>
+	</tr>
+	<tr>
+		<td><tt>:definition</tt></td>
+		<td>Term to define (definition is indented)</td>
+	</tr>
+	<tr>
+		<td><tt>@th Row</tt></td>
+		<td>Row of table headers</td>
+	</tr>
+	<tr>
+		<td><tt>@td Data</tt></td>
+		<td>Row of table data</td>
+	</tr>
+</table>
+
+<p>Example of list:</p>
+
+<blockquote>
+	<ul>
+		<li><p>One</p></li>
+		<li><p>Two</p></li>
+		<li><p>Three</p></li>
+	</ul>
+</blockquote>
+
+<p>Example of note:</p>
+
+<blockquote>
+	<div class="note">
+		<p><b>Note</b></p>
+		<p>Don't forget!</p>
+	</div>
+</blockquote>
+
+<p>Example of image:</p>
+
+<blockquote>
+	<p class="image"><img src="sample.png"/></p>
+	<p class="caption">A test image</p>
+</blockquote>
+
+<p>Example of definition list:</p>
+
+<blockquote>
+	<dl>
+		<dt>Lua</dt>
+		<dd><p>A scripting language</p></dd>
+		<dt>C++</dt>
+		<dd><p>A low level language</p></dd>
+	</dl>
+</blockquote>
+
+<h2><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e" width="0" height="0"><param name="Keyword" value="Formatting"/></object
+	><a name="Formatting">2.2 Formatting
+</a></h2>
+
+<table>
+	<tr>
+		<td><tt>%i Italic word</tt></td>
+		<td><i>Italic</i> word</td>
+	</tr>
+	<tr>
+		<td><tt>%ii Multiple italic words %ii</tt></td>
+		<td><i>Multiple italic words</i></td>
+	</tr>
+	<tr>
+		<td><tt>%b Bold word</tt></td>
+		<td><b>Bold</b> word</td>
+	</tr>
+	<tr>
+		<td><tt>%bb Multiple bold words %bb</tt></td>
+		<td><b>Multiple bold words</b></td>
+	</tr>
+	<tr>
+		<td><tt>%c Code word</tt></td>
+		<td><tt>Code</tt> word</td>
+	</tr>
+	<tr>
+		<td><tt>%cc Multiple code words %cc</tt></td>
+		<td><tt>Multiple code words</tt></td>
+	</tr>
+	<tr>
+		<td><tt>%link http://www.bitsquid.se/</tt></td>
+		<td><a class="link" href="http://www.bitsquid.se/">http://www.bitsquid.se/</a></td>
+	</tr>
+	<tr>
+		<td><tt>\%i Escaped</tt></td>
+		<td>%i Escaped</td>
+	</tr>
+</table>
+
+<h2><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e" width="0" height="0"><param name="Keyword" value="Source"/></object
+	><a name="Source code">2.3 Source code
+</a></h2>
+
+<table>
+	<tr>
+		<td><tt>@lua ... @endlua</tt></td>
+		<td>Mark a number of lines as Lua code</td>
+	</tr>
+	<tr>
+		<td><tt>@cpp ... @endcpp</tt></td>
+		<td>Mark a number of lines as C++ code</td>
+	</tr>
+	<tr>
+		<td><tt>@code ... @endcode</tt></td>
+		<td>Mark a number of lines as generic code</td>
+	</tr>
+	<tr>
+		<td><tt>@lualine print(x)</tt></td>
+		<td>Used for a single line of Lua</td>
+	</tr>
+	<tr>
+		<td><tt>@cppline x++;</tt></td>
+		<td>Used for a single line of C++</td>
+	</tr>
+	<tr>
+		<td><tt>@codeline cd ~/lib</tt></td>
+		<td>Used for a single line of generic code</td>
+	</tr>
+</table>
+
+<p>Example of source code:</p>
+
+<blockquote>
+	<pre>for (unsigned i=0; i&lt;n; ++i)
+	printf("%i\n", i);</pre>
+</blockquote>
+
+<h2><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e" width="0" height="0"><param name="Keyword" value="Glossary"/></object
+	><a name="Glossary">2.4 Glossary
+</a></h2>
+
+<table>
+	<tr>
+		<td><tt>%g Term</tt></td>
+		<td>Glossary term</td>
+	</tr>
+	<tr>
+		<td><tt>%gg Multiple word term %gg</tt></td>
+		<td>Glossary term with multiple worlds</td>
+	</tr>
+	<tr>
+		<td><tt>%g(term) Text</tt></td>
+		<td>Glossary item where term differs from text</td>
+	</tr>
+	<tr>
+		<td><tt>%gg(term) Multiple word term %gg</tt></td>
+		<td>Same for multiple words</td>
+	</tr>
+	<tr>
+		<td><tt>@glossary ... @endglossary</tt></td>
+		<td>Encapsulates glossary definition</td>
+	</tr>
+</table>
+
+<p>Example of glossary:</p>
+
+<blockquote>
+	<p>Don't <a class="ref" href="#glossary-forgetting">forget</a> to by <a class="ref" href="#glossary-groceries">groceries</a>.</p>
+	<dl>
+		<dt><a name="glossary-forgetting">forgetting</a></dt>
+		<dd>The act of losing from one's memory that which has been held there.</dd>
+		<dt><a name="glossary-groceries">groceries</a></dt>
+		<dd>Consumable goods purchased in a store.</dd>
+	</dl>
+</blockquote>
+
+<h2><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e" width="0" height="0"><param name="Keyword" value="API"/></object
+	><a name="API documentation">2.5 API documentation
+</a></h2>
+
+<table>
+	<tr>
+		<td><tt>@api</tt></td>
+		<td>Enter API documentation mode</td>
+	</tr>
+	<tr>
+		<td><tt>@text</tt></td>
+		<td>Back to regular text processing mode</td>
+	</tr>
+	<tr>
+		<td><tt>%r Applicaton.quit()</tt></td>
+		<td>Function reference: <a class="ref" href="Application.html#quit">Application.quit()</a></td>
+	</tr>
+</table>
+
+<pre>@api
+
+api_function_definition(with, arguments)
+    Api function description
+
+    :parameter
+        With description</pre>
+
+<p>Example of api documentation:</p>
+
+<p class="definition">
+	<a name="api_function_definition">
+		<object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e" width="0" height="0"><param name="Keyword" value="api_function_definition"/></object
+		>api_function_definition(with, arguments)
+	</a>
+</p>
+
+<blockquote>
+	<p>Api function description</p>
+	<dl>
+		<dt>parameter</dt>
+		<dd><p>With description</p></dd>
+	</dl>
+</blockquote>
+
+
+	</body>
+</html>

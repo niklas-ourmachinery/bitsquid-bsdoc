@@ -1,0 +1,10 @@
+Put this package in your Sublime Text 2 Packages directory to get syntax highlighting
+and build system integration of .bsdoc documents.
+
+Note: The syntax highlighting does not use the "proper" Sublime Text 2 markup tags.
+(markup.heading.1, etc) because they were not sufficiently distinct in the default
+color theme. And I didn't have patience enough to create a new color theme.
+
+The build system is setup to run the .bsdoc file through a _make.rb program in the
+files directory. See the Samples directory for samples of what a _make.rb program
+might look like.

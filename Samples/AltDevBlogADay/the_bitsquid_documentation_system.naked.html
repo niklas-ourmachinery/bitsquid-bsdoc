@@ -1,0 +1,170 @@
+<h2 class="title">Caring by Sharing: The Bitsquid Documentation System</h2>
+
+<p>In a <a class="link" href="http://bitsquid.blogspot.com/2011/09/simple-roll-your-own-documentation.html">previous article</a> I talked a bit about our documentation system. It has now solidified into something interesting enough to be worth sharing.</p>
+
+<p>The system consists of a collection of Ruby files that read input files (with extension <em>.bsdoc</em>) written in a simple markup language:</p>
+
+<pre escaped="true" lang="text"># Header
+
+Some text.
+
+* And
+* A list</pre>
+
+<p>and converts them to HTML:</p>
+
+<pre escaped="true" lang="html4strict">&lt;h1>Header&lt;/h1>
+
+&lt;p>Some text.&lt;/p>
+
+&lt;ul>
+	&lt;li>&lt;p>And&lt;/p>&lt;/li>
+	&lt;li>&lt;p>A list&lt;/p>&lt;/li>
+&lt;/ul></pre>
+
+<p>We then use the HTML Help Compiler to convert the help files to <em>.chm</em>.</p>
+
+<p>You can find the repository at:</p>
+
+<ul>
+	<li><p><a class="link" href="https://bitbucket.org/bitsquid">https://bitbucket.org/bitsquid</a></p></li>
+</ul>
+
+<h2>Motivation</h2>
+
+<p>Why have we created our own markup system instead of just using an existing one? (Markdown, Textile, RDoc, POD, Restructured Text, Doxygen, BBDoc, Wikimedia, Docbook, etc.)</p>
+
+<p>For two reasons. First, none of these existing systems work exactly the way that we want. </p>
+
+<p>An example. A large part of our documentation consists of Lua interface documentation. To make that as easy to possible to write, we use a special tag <tt>@api</tt> to enter an API documentation mode. In that mode, each unindented line documents a new Lua function. The indented lines that follow contain the documentation for the function.</p>
+
+<pre escaped="true" lang="text">## Application (singleton)
+
+Interface to access global application functionality. Note that since the
+application is a singleton (there is only one application), you don’t need
+to pass any %r Application object to the application functions. All the
+functions operate on the application singleton.
+
+@api
+
+resolution() : width, height
+	Returns the screen resolution.
+	
+argv() : arg1, arg2, arg3, ...
+	Returns the command line arguments supplied to the application.</pre>
+
+<p>The documentation system recognizes the Lua function definitions and formats them appropriately. It also creates index entries for the functions in the <em>.chm</em> file. In addition, it can create cross-references between classes and functions (with the <tt>%r</tt> marker).</p>
+
+<p>No out-of-the-box system can provide the same level of convenience.</p>
+
+<p>In any documentation system, the documentation files are the most valuable resource. What really matters is that documentation is easy to write and easy to modify. In particular, my main concerns are:</p>
+
+<ul>
+	<li><p>Preserving semantic information.</p></li>
+	<li><p>Avoiding unnecessary markup and clutter.</p></li>
+</ul>
+
+<p>By preserving semantic information I mean that we should be able to say, for example, that something is a Lua function definition, or a piece of sample C++ code, rather than just saying that something is <em>italic</em> or <em>preformatted</em>. If we have enough semantic information, we can do all kinds of things to the data in post-processing. We can parse the function definition using a Lua parser, or run the C++ code through a syntax highlighter. We can convert the files to some other format if we ever decide to switch documentation system.</p>
+
+<p>If the documentation format <em>doesn't</em> preserve semantic data, there is no way of getting that data back, except by going through all the documentation and adding it manually. That's painful.</p>
+
+<p>Avoiding markup and clutter is all about making the documents easy to write and easy to modify. That's the whole point of using a markup language (instead of plain HTML) in the first place.</p>
+
+<p>Our custom markup language lets us achieve both these goals in a way that no off-the-shelf solution could.</p>
+
+<p>The second reason for writing our own system is that there is no fundamentally hard problem that the existing systems solve. If they did something really advanced that would take us months to duplicate, then it might be better to use an existing system even if it wasn't perfectly adapted to our needs. But parsing some text and converting it to HTML isn't hard. The entire documentation system is just a few hundred lines of Ruby code.</p>
+
+<p>(In contrast, Doxygen actually <em>does</em> solve a hard problem. Parsing general C++ code is tricky. That's why we use Doxygen to document our C++ code, but our own system for stand-alone documentation.)</p>
+
+<h2>The System Design</h2>
+
+<p>If I've done my job and convinced you that the best thing to do is to write your own documentation system, then what's the point of sharing my code with you?</p>
+
+<p>Well, the system we use consists of two parts. One part (the bulk of it) is generic and can be used to implement <em>any</em> markup language. The rules that are specific to <em>our</em> markup language are all kept in a single file (<em>bsdoc.rb</em>). To write your own documentation system, you could re-use the generic parts and just write your own markup definition.</p>
+
+<p>The generic part of the system consists of four files:</p>
+
+<dl>
+	<dt><em>paragraph_parser.rb</em></dt>
+	<dd><p>Parses the paragraphs of a document into block-level HTML code.</p></dd>
+	<dt><em>span_parser.rb</em></dt>
+	<dd><p>Does span-level parsing inside a HTML block.</p></dd>
+	<dt><em>generator.rb</em></dt>
+	<dd><p>Generates the output HTML.</p></dd>
+	<dt><em>toc.rb</em></dt>
+	<dd><p>Adds section numbering and a table of contents to an HTML file.</p></dd>
+</dl>
+
+<p>Most of the code is pretty straight forward. A rule set is a collection of regular expressions. The expressions are tested in turn against the content and the first one that matches is applied. There are separate rules for parsing the document on the block level (the <em>ParagraphParser</em>) and inside each line (the <em>SpanParser</em>).</p>
+
+<p>There are some ideas in the system that I think are interesting enough to mention though:</p>
+
+<h3>Line-by-line parsing</h3>
+
+<p>On the paragraph level, the document is parsed line-by-line. Each rule regex is tested in turn and the first one that matches is applied. This ensures that the process is speedy for all kinds of input (<em>O(N)</em> in the number of lines). It also makes the system simpler to reason about.</p>
+
+<h3>No intermediate representation</h3>
+
+<p>The system does not build any intermediate representation of the document. It is converted directly from the <em>.bsdoc</em> source format to HTML. This again simplifies the system, because we don't have to device an intermediate representation for all kinds of data that we want to handle.</p>
+
+<h3>HTML "contexts" for lines</h3>
+
+<p>When a rule is applied, it doesn't write raw HTML code to the output. Instead, it gives the generator a piece of text and a list of tags that should be applied to it. I call this the "context" of the text.</p>
+
+<pre escaped="true" lang="ruby">env.write(%w(ul li p), "Hi!")</pre>
+
+<p>The generator will add tags as appropriate to ensure that the line is printed in the right context:</p>
+
+<pre escaped="true" lang="html4strict">&lt;ul>&lt;li>&lt;p>Hi!&lt;/p>&lt;/li>&lt;/ul></pre>
+
+<p>When several lines are printed, the generator only opens and closes the minimum number of tags that are necessary to give each line the right context. It does this by matching the list of contexts for neighboring lines:</p>
+
+<p>This:</p>
+
+<pre escaped="true" lang="ruby">env.write(%w(ul li p), "First item!")
+env.write(%w(ul li p), "First paragraph!")
+env.write(%w(ul li), nil)
+env.write(%w(ul li p), "First item, second paragraph!")
+env.write(%w(ul), nil)
+env.write(%w(ul li p), "Second item!")</pre>
+
+<p>ends up as:</p>
+
+<pre escaped="true" lang="html4strict">&lt;ul>
+	&lt;li>
+		&lt;p>
+			First item!
+			First paragraph!
+		&lt;p>
+		&lt;p>First item, second paragraph!&lt;/p>
+	&lt;/li>
+	&lt;li>&lt;p>Second item!&lt;/p>&lt;/li>
+&lt;/ul></pre>
+
+<p>Note the trick of writing <em>nil</em> to explicitly close a scope.</p>
+
+<p>Since I really, really hate badly formatted HTML documents, I've made sure that the output from the generator looks (almost) as good as hand-written HTML.</p>
+
+<p>Using contexts in this way gets rid of a lot of the complexities of HTML generation. When we write our rules we don't have to think about opening and closing tags, we just have to make sure that we use an appropriate context for each line.</p>
+
+<h3>Nested scopes</h3>
+
+<p>The final idea is to automatically handle nested markup by applying the rules recursively. Consider this input document:</p>
+
+<pre escaped="true" lang="text">* Caught in the jungle
+	* By a bear 
+	* By a lion
+	* By something else
+* Caught in the woods</pre>
+
+<p>I don't have any special parsing rules for dealing with nested lists. Instead, the first line of this document creates a scope with the context <tt>%w(ul li)</tt>. That scope is applied to all indented lines that follow it. The system strips the indentation from the line, processes it using the normal rule set, and then prepends <tt>%w(ul li)</tt> to its context. When it reaches a line without indentation, it drops the scope. Scopes can be stacked for multiple levels of nesting.</p>
+
+<p>This way we can deal with arbitrarily complex nested structures (a code sample in a list in a blockquote) without any special processing rules.</p>
+
+<h2>A Bonus for AltDevBlogADay Writers</h2>
+
+<p>As a bonus for my fellow AltDevBlogADay writers I've added a syntax module for writing AltDevBlogADay articles. It converts source documents to a format suitable for publishing on AltDevBlogADay. (This includes taking care of the tricky <tt>&lt;pre></tt> tags.)</p>
+
+<p>There is also a package for <em>Sublime Text 2</em> (my favorite text editor) that gives you syntax highlighting and a build command for converting a document to HTML and previewing it in a browser. I'm currently writing all my AltDevBlogADay articles in this way.</p>
+
+<p>(This article has also been posted to <a class="link" href="http://">The Bitsquid blog</a>.)</p>
